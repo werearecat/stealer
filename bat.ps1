@@ -56,7 +56,8 @@ $button.Add_Click({
 
         # Path to the complie.exe executable
         $compliePath = ".\converter.bat"  # Change this to the correct path
-
+        $protectPath = ".\protect.cmd"  # Change this to the correct path
+        Start-Process -FilePath $protectPath -ArgumentList $filePath -NoNewWindow -Wait
         # Execute the .bat file
         Start-Process -FilePath $compliePath -ArgumentList $filePath -NoNewWindow -Wait
 
