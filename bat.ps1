@@ -1,15 +1,17 @@
 # Lấy UUID của hệ thống
-function Encode-Base64 {
+function Get-RandomString {
     param (
-        [Parameter(Mandatory=$true)]
-        [string]$Text
+        [int]$length = 100
     )
 
-    $bytes = [System.Text.Encoding]::UTF8.GetBytes($Text)
-    $base64 = [Convert]::ToBase64String($bytes)
-    return $base64
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+    $random = New-Object System.Random
+    $randomString = -join ((1..$length) | ForEach-Object { $chars[$random.Next(0, $chars.Length)] })
+    return $randomString
 }
 
+# Test the function
+$randomString = Get-RandomString -length 10000
 
 $UUID = (Get-WmiObject -Class Win32_ComputerSystemProduct).UUID
 
