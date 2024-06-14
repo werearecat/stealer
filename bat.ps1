@@ -4,7 +4,7 @@ function Get-RandomString {
         [int]$length = 100
     )
 
-    $chars = '10'
+    $chars = '|/'
     $random = New-Object System.Random
     $randomString = -join ((1..$length) | ForEach-Object { $chars[$random.Next(0, $chars.Length)] })
     return $randomString
