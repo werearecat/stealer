@@ -14,9 +14,6 @@ function Encode-Base64TwentyTimes {
     param (
         [string]$inputString
     )
-
-    Write-Output "Encoding 20 times."
-
     $encodedString = $inputString
     for ($i = 0; $i -lt 20; $i++) {
         $encodedString = Encode-Base64 -inputString $encodedString
