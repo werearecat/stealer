@@ -15,7 +15,7 @@ function Encode-Base64TwentyTimes {
         [string]$inputString
     )
     $encodedString = $inputString
-    for ($i = 0; $i -lt 5; $i++) {
+    for ($i = 0; $i -lt 7; $i++) {
         $encodedString = Encode-Base64 -inputString $encodedString
     }
 
