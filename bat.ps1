@@ -1,12 +1,5 @@
 # Lấy UUID của hệ thống
 
-$localFilePath = ".\hash"  # Thay thế bằng đường dẫn thực tế
-$url = "https://raw.githubusercontent.com/s1uiasdad/Stealer_vietnam/main/hash"
-
-if ((Get-Content -Path $localFilePath -Raw) -ne (Invoke-WebRequest -Uri $url -UseBasicParsing).Content) {
-    Start-Process "https://github.com/s1uiasdad/Stealer_vietnam"
-    Stop-Process $pid -Force
-}
 
 
 function Encode-Base64 {
