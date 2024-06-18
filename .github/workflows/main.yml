@@ -1,6 +1,7 @@
 name: Print Repository Directory
 
-on: [push]
+on:
+  push:
 
 jobs:
   print-repo-dir:
