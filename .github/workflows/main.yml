@@ -1,14 +1,14 @@
-name: Print Repository Directory
+name: Example Workflow on Windows
 
-on:
-  push:
+on: [push]
 
 jobs:
-  print-repo-dir:
+  build:
     runs-on: windows-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
 
-      - name: Print repository directory
-        run: echo "Repository Directory: ${{ github.workspace }}"
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Display GitHub workspace
+      run: echo "GitHub workspace is located at ${{ github.workspace }}"
