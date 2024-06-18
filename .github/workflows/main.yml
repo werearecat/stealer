@@ -4,11 +4,10 @@ on: [push]
 
 jobs:
   print-repo-dir:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
 
     - name: Print repository directory
-      run: echo "Repository Directory: ${{ github.workspace }} ${{ github.repository_url }}"
-      
+      run: echo "Repository Directory: ${{ github.workspace }}"
