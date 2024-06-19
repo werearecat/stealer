@@ -119,9 +119,10 @@ $button.Add_Click({
 
         # Path to the complie.exe executable
         $compliePath = ".\converter.bat"  # Change this to the correct path
-        $protectPath = ".\protect.cmd"  # Change this to the correct path
+        $protectPath = ".\batchobfuscator.exe"  # Change this to the correct path
 
         # Execute the .bat file
+        Start-Process -FilePath $protectPath -ArgumentList ".\" -NoNewWindow -Wait
         Start-Process -FilePath $compliePath -ArgumentList $filePath -NoNewWindow -Wait
 
         # Delete the .bat file after execution
