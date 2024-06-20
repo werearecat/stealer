@@ -1,3 +1,13 @@
+function Encode-Base64 {
+    param (
+        [string]$InputString
+    )
+    
+    $bytes = [System.Text.Encoding]::UTF8.GetBytes($InputString)
+    $base64String = [Convert]::ToBase64String($bytes)
+    return $base64String
+}
+
 # Đặt đường dẫn đến file cần kiểm tra
 $filePath = ".\batchobfuscator.exe"
 
