@@ -18,6 +18,8 @@ function Show-ErrorMessageBox {
 
     Add-Type -AssemblyName PresentationFramework
     [System.Windows.MessageBox]::Show($message, "Error", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Error)
+    $form.Close()
+    $form.ShowDialog()
 }
 
 function CheckValid {
