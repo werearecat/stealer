@@ -175,7 +175,7 @@ $button.Add_Click({
         # Show a message box
         [System.Windows.Forms.MessageBox]::Show('Process completed and file deleted.', 'Completed', [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
     } else {
-        [System.Windows.Forms.MessageBox]::Show('Please enter a valid Discord webhook URL.', 'Error', [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
+        Write-Host "hello"
     }
 })
 
