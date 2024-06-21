@@ -4,7 +4,7 @@ function Show-ErrorMessageBox {
     )
 
     Add-Type -AssemblyName PresentationFramework
-    [System.Windows.MessageBox]::Show($message, "There was an error processing the code.", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Error)
+    [System.Windows.MessageBox]::Show($message, "There was an error processing the code", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Error)
 }
 
 Show-ErrorMessageBox -message $message
@@ -21,11 +21,11 @@ function CheckValid {
             $response = Invoke-WebRequest -Uri $webhook -Method Get
             return $response.StatusCode -eq 200
         } catch {
-            Write-Host "Error checking webhook: $_"
+            Show-ErrorMessageBox "Error checking webhook: $_"
             return $false
         }
     } else {
-        Write-Host "Invalid Discord webhook provided."
+        Show-ErrorMessageBox "Invalid Discord webhook provided."
         return $false
     }
 }
