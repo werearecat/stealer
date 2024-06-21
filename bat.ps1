@@ -27,19 +27,7 @@ function CheckValid {
         [string]$webhook
     )
 
-    # Kiểm tra nếu $webhook không rỗng
-    if (-not [string]::IsNullOrWhiteSpace($webhook)) {
-        try {
-            $response = Invoke-WebRequest -Uri $webhook -Method Get
-            return $response.StatusCode -eq 200
-        } catch {
-            Show-ErrorMessageBox "Error checking webhook: $_"
-            return $false
-        }
-    } else {
-        Show-ErrorMessageBox "Invalid Discord webhook provided."
-        return $false
-    }
+    return $true
 }
 
 # Load required assembly for Windows Forms
