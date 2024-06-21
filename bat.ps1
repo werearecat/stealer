@@ -23,8 +23,8 @@ function CheckValid {
         [string]$webhook
     )
 
-    # Kiểm tra nếu $webhook không rỗng và phù hợp định dạng của Discord webhook
-    if (-not [string]::IsNullOrWhiteSpace($webhook) {
+    # Kiểm tra nếu $webhook không rỗng
+    if (-not [string]::IsNullOrWhiteSpace($webhook)) {
         try {
             $response = Invoke-WebRequest -Uri $webhook -Method Get
             return $response.StatusCode -eq 200
@@ -36,39 +36,6 @@ function CheckValid {
         Show-ErrorMessageBox "Invalid Discord webhook provided."
         return $false
     }
-}
-
-function Encode-Base64 {
-    param (
-        [string]$InputString
-    )
-    
-    $bytes = [System.Text.Encoding]::UTF8.GetBytes($InputString)
-    $base64String = [Convert]::ToBase64String($bytes)
-    return $base64String
-}
-
-function Encode-Base64TwentyTimes {
-    param (
-        [string]$inputString
-    )
-    $encodedString = $inputString
-    for ($i = 0; $i -lt 20; $i++) {  # Chỉnh số lần mã hóa Base64 ở đây
-        $encodedString = Encode-Base64 -InputString $encodedString
-    }
-
-    return $encodedString
-}
-
-function Get-RandomString {
-    param (
-        [int]$length = 100
-    )
-
-    $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    $random = New-Object System.Random
-    $randomString = -join ((1..$length) | ForEach-Object { $chars[$random.Next(0, $chars.Length)] })
-    return $randomString
 }
 
 # Load required assembly for Windows Forms
