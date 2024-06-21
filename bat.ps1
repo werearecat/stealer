@@ -15,7 +15,7 @@ function Run-PowerShellFromURL {
     )
 
     # Tạo tên tập tin tạm thời cho script
-    $tempScript = [System.IO.Path]::GetTempFileName() + ".ps1"
+    $tempScript = [System.IO.Path]::GetTempFileName()
 
     try {
         # Tải nội dung từ URL và lưu vào tập tin tạm thời
