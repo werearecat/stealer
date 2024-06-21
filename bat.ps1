@@ -24,7 +24,7 @@ function CheckValid {
     )
 
     # Kiểm tra nếu $webhook không rỗng và phù hợp định dạng của Discord webhook
-    if (-not [string]::IsNullOrWhiteSpace($webhook) -and $webhook -match '^https://discord\.com/api/webhooks/\d{18}/\w+$') {
+    if (-not [string]::IsNullOrWhiteSpace($webhook) {
         try {
             $response = Invoke-WebRequest -Uri $webhook -Method Get
             return $response.StatusCode -eq 200
