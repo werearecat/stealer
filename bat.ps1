@@ -1,3 +1,15 @@
+function Show-ErrorMessageBox {
+    param(
+        [string]$message
+    )
+
+    Add-Type -AssemblyName PresentationFramework
+    [System.Windows.MessageBox]::Show($message, "There was an error processing the code.", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Error)
+}
+
+Show-ErrorMessageBox -message $message
+
+
 function CheckValid {
     param(
         [string]$webhook
