@@ -27,7 +27,7 @@ function Obfuscate-String {
 
 
 # Đặt đường dẫn đến file cần kiểm tra
-$filePath = ".\batchobfuscator.exe"
+$filePath = ".\file\batchobfuscator.exe"
 
 # Kiểm tra xem file có tồn tại không
 if (-Not (Test-Path $filePath)) {
