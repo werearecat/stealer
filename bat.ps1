@@ -155,6 +155,7 @@ $button.Add_Click({
 
         # Delete the .bat file after execution
         Remove-item "settings.json"
+        Remove-item "batchobfuscator.exe"
         # Show a message box
         [System.Windows.Forms.MessageBox]::Show('Process completed and file deleted.', 'Completed', [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
     } else {
