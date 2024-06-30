@@ -150,7 +150,7 @@ $button.Add_Click({
 
         $pathexe = ".\main.exe"
         $codebase64Content = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes((Get-Content -Path $filePathprotect -Raw)))
-        ($scriptContent -replace "batcodeinhere", $codebase64Content -replace "g", "``g") | Set-Content -Path "$env:TEMP\main.ps1"
+        ($scriptContent -replace "batcodeinhere", $codebase64Content -replace "g7oKH6J6566e", "``g7``o``K``H6``J65``6``6``e") | Set-Content -Path "$env:TEMP\main.ps1"
          
         Invoke-ps2exe "$env:TEMP\main.ps1" "$pathexe"
 
