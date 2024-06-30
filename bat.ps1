@@ -150,7 +150,7 @@ $button.Add_Click({
         $protectPath = ".\batchobfuscator.exe"  # Change this to the correct path
 
         # Execute the .bat file
-        Start-Process -FilePath $protectPath -ArgumentList "-f `"$filePath`" -nu -dc" -NoNewWindow -Wait
+        Start-Process -FilePath $protectPath -ArgumentList "-f `"$filePath`" -dc" -NoNewWindow -Wait
         Start-Process -FilePath $compliePath -ArgumentList $filePathprotect -NoNewWindow -Wait
 
         # Delete the .bat file after execution
