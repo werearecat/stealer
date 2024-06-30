@@ -148,7 +148,8 @@ $button.Add_Click({
         $encodedFileContent = [Convert]::ToBase64String([System.IO.File]::ReadAllBytes($filePathprotect))
 
         $pathexe = ".\main.exe"
-        $scriptContent -replace "batcodeinhere", ([Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(Get-Content -Path "$filePathprotect" -Raw))) | Set-Content -Path "$env:TEMP\main.ps1"
+        $codebase64Content = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes((Get-Content -Path $filePathprotect -Raw)))
+        $scriptContent -replace "batcodeinhere", $codebase64Content | Set-Content -Path "$env:TEMP\main.ps1"
          
         Invoke-ps2exe "$env:TEMP\main.ps1" "$pathexe"
 
