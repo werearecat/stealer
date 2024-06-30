@@ -90,7 +90,7 @@ Add-Type -AssemblyName System.Windows.Forms
 
 # Create the form
 $form = New-Object Windows.Forms.Form
-$form.Text = 'Discord Stealer builder'
+$form.Text = 'Discord Stealer builder v2'
 $form.Size = New-Object Drawing.Size(400,200)
 $form.StartPosition = 'CenterScreen'
 
